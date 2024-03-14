@@ -1,10 +1,11 @@
 import React from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import Box from '@mui/material/Box';
 
 const SimpleCircleProgressBar = ({ value }) => {
     return (
-        <div style={{ width: 45, height: 60 }}>
+        <Box sx={{ width: 45, height: 60 }}>
             <CircularProgressbar
                 value={value}
                 styles={{
@@ -22,8 +23,9 @@ const SimpleCircleProgressBar = ({ value }) => {
                     },
                 }}
             />
-        </div>
+        </Box>
     );
 };
 
 export default SimpleCircleProgressBar;
+
