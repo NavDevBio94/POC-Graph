@@ -1,11 +1,13 @@
-import './App.css';
-import SimpleCircleProgressBar from './Components/Atoms/SimpleCircleProgressBar/SimpleCircleProgressBar';
-import Card from './Components/Molecules/Card/Card';
-import SimpleProgressBar from './Components/Atoms/SimpleProgressBar/SimpleProgressBar';
-import { useState } from 'react';
-import './Components/Atoms/SimpleProgressBar/SimpleProgressBar.css';
 import * as React from 'react';
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 import { ChartContainer, BarPlot } from '@mui/x-charts';
+import SimpleCircleProgressBar from './Components/Atoms/SimpleCircleProgressBar/SimpleCircleProgressBar';
+import SimpleProgressBar from './Components/Atoms/SimpleProgressBar/SimpleProgressBar';
+import './App.css';
+
 function App() {
     const [progress] = useState(75);
     const tooltipPosition = `calc(${progress}% - 30px)`;
@@ -16,58 +18,61 @@ function App() {
 
     const dayRanges = [
         { label: '0-30 Days', color: barColors[0] },
-        { label: '31-60 Days', color: barColors[1] }, 
+        { label: '31-60 Days', color: barColors[1] },
         { label: '61-90 Days', color: barColors[2] },
-        { label: '90+ Days', color: barColors[3] }, 
+        { label: '90+ Days', color: barColors[3] },
     ];
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-            <Card>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ width: '200px' }}>
-                        <p style={{ fontSize: '12px' }}>INCOMING VEHICLES THIS WEEK/MONTH</p>
-                        <p style={{ fontSize: '14px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+            <Card sx={{ p: 2, m: 1 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <Box sx={{ width: 150 }}>
+                        <Typography variant='body2'>INCOMING VEHICLES THIS WEEK/MONTH</Typography>
+                        <Typography variant='body2'>
                             <b>08</b>
-                        </p>
-                    </div>
+                        </Typography>
+                    </Box>
                     <SimpleCircleProgressBar value={60} />
-                </div>
+                </Box>
             </Card>
-            <Card>card 2</Card>
-            <Card>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ width: '100px' }}>
-                        <p style={{ fontSize: '14px' }}>UNITS SOLD THIS MONTH</p>
-                        <p style={{ fontSize: '14px' }}>
+            <Card sx={{ p: 2, m: 1 }}>card 2</Card>
+            <Card sx={{ p: 2, m: 1 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ width: 100 }}>
+                        <Typography variant='body2'>UNITS SOLD THIS MONTH</Typography>
+                        <Typography variant='body2'>
                             <b>{progress}</b>
-                        </p>
-                    </div>
+                        </Typography>
+                    </Box>
 
-                    <div className='progress-container'>
-                        <div className='tooltip' style={{ left: tooltipPosition, bottom: '160%' }}>
-                            {progress}%<div className='tooltip-arrow'></div>
-                        </div>
+                    <Box className='progress-container' sx={{ position: 'relative' }}>
+                        <Box
+                            className='tooltip'
+                            sx={{ left: tooltipPosition, bottom: '130%', position: 'absolute' }}
+                        >
+                            {progress}%<Box className='tooltip-arrow' />
+                        </Box>
                         <SimpleProgressBar completed={progress} targetText='Target' />
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             </Card>
-            <Card>
-                <div
-                    style={{
+            <Card sx={{ p: 2, m: 1, maxHeight: '80px' }}>
+                <Box
+                    sx={{
                         display: 'flex',
                         alignItems: 'center',
                         position: 'relative',
-                        gap: '20px',
-                        bottom: '40px',
+                        gap: 5,
+                        bottom: 40,
                     }}
                 >
-                    <div style={{ width: '30px' }}>
-                        <p style={{ fontSize: '14px' }}>AGING INVENTORY</p>
-                        <p style={{ fontSize: '14px' }}>
+                    <Box sx={{ width: 30 }}>
+                        <Typography variant='body2'>AGING INVENTORY</Typography>
+                        <Typography variant='body2'>
                             <b>35 DAYS</b>
-                        </p>
-                    </div>
+                        </Typography>
+                    </Box>
                     <ChartContainer
                         width={170}
                         height={170}
@@ -77,47 +82,52 @@ function App() {
                         {uData.map((dataPoint, index) => (
                             <BarPlot
                                 key={xLabels[index]}
-                                dataKey={xLabels[index]}
+                                datakey={xLabels[index]}
                                 fill={barColors[index % barColors.length]}
                                 style={{ borderRadius: '20px' }}
                             />
                         ))}
                     </ChartContainer>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                            {dayRanges.map((range, index) => (
-                                <div
-                                    key={index}
-                                    style={{
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            gap: 0.5,
+                        }}
+                    >
+                        {dayRanges.map((range, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1,
+                                    fontSize: '10px',
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        width: 10,
+                                        height: 10,
                                         display: 'flex',
+                                        borderRadius: '50%',
+                                        justifyContent: 'center',
                                         alignItems: 'center',
-                                        gap: '10px',
-                                        fontSize: '10px',
+                                        bgcolor: range.color,
+                                        color: 'white',
                                     }}
-                                >
-                                    <span
-                                        style={{
-                                            width: '10px',
-                                            height: '10px',
-                                            display: 'flex',
-                                            borderRadius: '10%',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            backgroundColor: range.color,
-                                            color: 'white',
-                                        }}
-                                    />
-                                    {range.label}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                                />
+                                {range.label}
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
             </Card>
-            <Card>
-                <p>Card 5</p>
+            <Card sx={{ p: 2, m: 1 }}>
+                <Typography>Card 5</Typography>
             </Card>
-        </div>
+        </Box>
     );
 }
 
