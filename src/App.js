@@ -67,9 +67,9 @@ function App() {
                         bottom: 40,
                     }}
                 >
-                    <Box sx={{ width: 30 }}>
+                    <Box sx={{ width: 10 }}>
                         <Typography variant='body2'>AGING INVENTORY</Typography>
-                        <Typography variant='body2'>
+                        <Typography variant='body1'>
                             <b>35 DAYS</b>
                         </Typography>
                     </Box>
