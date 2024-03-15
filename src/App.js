@@ -9,7 +9,7 @@ import './App.css';
 import { BarChart, Bar, Cell } from 'recharts';
 function App() {
     const [progress] = useState(75);
-    const tooltipPosition = `calc(${progress}% - 30px)`;
+    const tooltipPosition = `calc(${progress}% - 10px)`;
 
     const data = [
         { name: 'Jan', uv: 40 },
@@ -77,7 +77,7 @@ function App() {
                         <Typography sx={{ fontSize: '12px' }}>
                             INCOMING VEHICLES <br /> THIS WEEK/MONTH
                         </Typography>
-                        <Typography sx={{ fontSize: '16px' }}>
+                        <Typography sx={{ fontSize: '18px' }}>
                             <b>08</b>
                         </Typography>
                     </Box>
@@ -89,7 +89,7 @@ function App() {
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Box sx={{ width: 100 }}>
                         <Typography variant='body2'>UNITS SOLD THIS MONTH</Typography>
-                        <Typography variant='body2'>
+                        <Typography sx={{ fontSize: '18px' }}>
                             <b>{progress}</b>
                         </Typography>
                     </Box>
@@ -104,9 +104,7 @@ function App() {
                                 left: tooltipPosition,
                                 bottom: '130%',
                                 position: 'absolute',
-
                                 p: 0.5,
-                                fontSize: '0.875rem',
                                 borderRadius: 1,
                                 transform: 'translateX(-50%)',
                             }}
@@ -131,20 +129,20 @@ function App() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        gap: '7px',
+                        gap: '16px',
                     }}
                 >
                     <Box>
                         <Typography sx={{ fontSize: '12px' }}>
                             AGING <br /> INVENTORY
                         </Typography>
-                        <Typography sx={{ fontSize: '16px' }}>
+                        <Typography sx={{ fontSize: '18px' }}>
                             <b>35 DAYS</b>
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                         <BarChart width={50} height={70} data={data}>
-                            <Bar dataKey='uv' radius={[10, 10, 10, 10]} barSize={7}>
+                            <Bar dataKey='uv' radius={[10, 10, 10, 10]} barSize={6}>
                                 {data.map((entry, index) => (
                                     <Cell
                                         style={{ gap: '10px' }}
