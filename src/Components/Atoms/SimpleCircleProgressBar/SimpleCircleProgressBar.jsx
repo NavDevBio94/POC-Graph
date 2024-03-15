@@ -1,25 +1,39 @@
 import React from 'react';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import Box from '@mui/material/Box';
+import CircularProgress, { circularProgressClasses } from '@mui/material/CircularProgress';
 
 const SimpleCircleProgressBar = ({ value }) => {
+    const SIZE = 55; // Diameter of the progress circle
+    const STROKE_WIDTH = 5; // Width of the stroke
+
     return (
-        <Box sx={{ width: 45, height: 60 }}>
-            <CircularProgressbar
+        <Box sx={{
+            width: SIZE,
+            height: SIZE,
+            position: 'relative',
+            transform: 'rotate(-220deg)' // Rotate the container to start the progress from the left
+        }}>
+            <CircularProgress
+                variant="determinate"
+                value={100} // Background circle
+                size={SIZE}
+                thickness={STROKE_WIDTH}
+                sx={{
+                    color: '#d6d6d6', // Trail color
+                    position: 'absolute',
+                }}
+            />
+            <CircularProgress
+                variant="determinate"
                 value={value}
-                styles={{
-                    root: {
-                        transform: 'scaleX(-1)',
-                    },
-                    path: {
-                        stroke: `black`,
-                        strokeLinecap: 'round',
-                        transition: 'stroke-dashoffset 0.5s ease 0s',
-                    },
-                    trail: {
-                        stroke: '#d6d6d6',
-                        strokeLinecap: 'butt',
+                size={SIZE}
+                thickness={STROKE_WIDTH}
+                sx={{
+                    color: 'black', // Progress color
+                    animationDuration: '550ms',
+                    position: 'absolute',
+                    [`& .${circularProgressClasses.circle}`]: {
+                     
                     },
                 }}
             />
@@ -28,4 +42,3 @@ const SimpleCircleProgressBar = ({ value }) => {
 };
 
 export default SimpleCircleProgressBar;
-
