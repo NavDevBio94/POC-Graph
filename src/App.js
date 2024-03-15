@@ -94,12 +94,25 @@ function App() {
                         </Typography>
                     </Box>
 
-                    <Box className='progress-container' sx={{ position: 'relative' }}>
+                    <Box
+                        className='progress-container'
+                        sx={{ position: 'relative', marginTop: '15px' }}
+                    >
                         <Box
                             className='tooltip'
-                            sx={{ left: tooltipPosition, bottom: '130%', position: 'absolute' }}
+                            sx={{
+                                left: tooltipPosition,
+                                bottom: '130%',
+                                position: 'absolute',
+
+                                p: 0.5,
+                                fontSize: '0.875rem',
+                                borderRadius: 1,
+                                transform: 'translateX(-50%)',
+                            }}
                         >
-                            {progress}%<Box className='tooltip-arrow' />
+                            {progress}%
+                            <Box className='tooltip-arrow' />
                         </Box>
                         <SimpleProgressBar completed={progress} targetText='Target' />
                     </Box>
