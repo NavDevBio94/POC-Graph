@@ -23,3 +23,27 @@
     border-style: solid;
     border-color: white transparent transparent transparent;
 }
+
+.progress-container {
+    display: flex;
+    align-items: center;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-color {
+    gap: 10px;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 2px;
+}
