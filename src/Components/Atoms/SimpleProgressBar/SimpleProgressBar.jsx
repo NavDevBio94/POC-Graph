@@ -1,24 +1,22 @@
 import React from 'react';
-import ProgressBar from '@ramonak/react-progress-bar';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Box, LinearProgress, Typography, styled } from '@mui/material';
+const CustomLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 8,
+    width: 150,
+    borderRadius: 8,
+    '& .MuiLinearProgress-bar': {
+        borderRadius: 8,
+        backgroundColor: 'black',
+    },
+}));
 
 const SimpleProgressBar = ({ completed, targetText }) => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <ProgressBar
-                completed={completed}
-                bgColor="black"
-                height="8px"
-                borderRadius="8px"
-                baseBgColor="#e0e0de"
-                labelColor="white"
-                width="150px"
-                labelSize="0px"
-            />
+            <CustomLinearProgress variant="determinate" style={{ backgroundColor: '#EEEFF2' }} value={completed} />
             <Typography
-                sx={{ mt: 0.5, fontSize: '11px' }}
-                color="textSecondary"
+                sx={{ mt: 0.5, fontSize: '11px', color: 'black' }}
+
             >
                 {targetText}
             </Typography>
