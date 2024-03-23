@@ -370,21 +370,19 @@ function App() {
                                     >
                                         <defs>
                                             <linearGradient
-                                                id='gradient'
-                                                x1='0'
-                                                y1='0'
-                                                x2='0'
-                                                y2='0'
+                                                id='progressGradient'
+                                                x1='0%'
+                                                y1='0%'
+                                                x2='100%'
+                                                y2='0%'
                                             >
                                                 <stop
-                                                    className='gradient-color-start'
                                                     offset='0%'
-                                                    stopColor='blue'
+                                                    style={{ stopColor: '#2F2F2F', stopOpacity: 1 }}
                                                 />
                                                 <stop
-                                                    className='gradient-color-end'
-                                                    offset='0%'
-                                                    stopColor='transparent'
+                                                    offset='100%'
+                                                    style={{ stopColor: '#990021', stopOpacity: 1 }}
                                                 />
                                             </linearGradient>
                                         </defs>
@@ -399,7 +397,7 @@ function App() {
                                         <path
                                             d={progressPath}
                                             className='radial-slider__content-wrapper__progress'
-                                            stroke='blue'
+                                            stroke='url(#progressGradient)'
                                             strokeWidth='6'
                                         />
 
