@@ -10,25 +10,16 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import arrowUp from '../src/Assets/magnifying.png';
 import React from 'react';
+import { data, colorRanges, legends, progressBars, tickPaths } from '.././src/Utils/Data';
 
 function App() {
     const [progress] = useState(75);
     const tooltipPosition = `calc(${progress}% - 10px)`;
     const [open, setOpenClose] = useState(true);
 
-    const data = [
-        { name: 'Jan', uv: 40 },
-        { name: 'Feb', uv: 120 },
-        { name: 'Mar', uv: 90 },
-        { name: 'Apr', uv: 70 },
-    ];
-
-    const colorRanges = [
-        { range: '0-30 days', color: '#2F2F2F' },
-        { range: '31-60 days', color: 'pink' },
-        { range: '61-90 days', color: '#990021' },
-        { range: '90+ days', color: '#ABABAB' },
-    ];
+    const toggleOpenClose = () => {
+        setOpenClose(!open);
+    };
 
     const getColorForValue = (value) => {
         if (value <= 40) return '#2F2F2F';
@@ -67,182 +58,46 @@ function App() {
         </Box>
     );
 
-    const toggleOpenClose = () => {
-        setOpenClose(!open);
-    };
+    function createCircleArcPath(
+        circleCenterX,
+        circleCenterY,
+        radiusCircle,
+        startAngleDegreesCircle,
+        endAngleDegreesCircle
+    ) {
+        const startRadiansCircle = (Math.PI / 180) * (startAngleDegreesCircle - 90);
+        const endRadiansCircle = (Math.PI / 180) * (endAngleDegreesCircle - 90);
 
-    const progressBars = [
-        { value: 80, strokeWidth: 10, color: '#2F2F2F' },
-        { value: 65, size: 48, margin: '8%', color: '#990021', strokeWidth: 18 },
-        { value: 58, size: 72, margin: '12%', color: '#828282', strokeWidth: 13 },
-    ];
+        const circleArcStartX = circleCenterX + radiusCircle * Math.cos(startRadiansCircle);
+        const circleArcStartY = circleCenterY + radiusCircle * Math.sin(startRadiansCircle);
+        const circleArcEndX = circleCenterX + radiusCircle * Math.cos(endRadiansCircle);
+        const circleArcEndY = circleCenterY + radiusCircle * Math.sin(endRadiansCircle);
 
-    const legends = [
-        { color: '#2F2F2F', text: 'ON GROUND' },
-        { color: '#828282', text: 'PIPELINE' },
-        { color: '#990021', text: 'USED' },
-    ];
+        const largeArcFlagCircle =
+            endAngleDegreesCircle - startAngleDegreesCircle > 180 ? '1' : '0';
 
-    const tickPaths = [
-        {
-            d: 'M89.5078 10.9082V13.6986',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M107.012 18.4648L106.25 19.2269',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M68.1855 23.2891L70.2644 24.4893',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M77.1602 14.3145L77.699 15.2478',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M65.1543 35.7676L66.169 35.7676',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M66.2441 42.1484L67.2852 41.8695',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M83.0742 11.8652L83.3532 12.9063',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M101.934 14.5684L101.395 15.5017',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M65.9902 29.457L67.0313 29.736',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M96.2734 11.8652L95.9945 12.9063',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M110.654 23.543L108.575 24.7432',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M72.082 18.2109L72.8441 18.973',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M107.814 46.3555L109.893 47.5557',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M112.084 35.7676L113.099 35.7676',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M111.545 29.8242L112.586 29.5453',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M111.293 41.5273L112.334 41.8063',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-        {
-            d: 'M71.0254 46.6094L68.9463 47.8097',
-            stroke: '#D9D9D9',
-            strokeWidth: '2',
-            strokeLinecap: 'round',
-        },
-    ];
-
-    function determinePercentage(percent) {
-        document
-            .querySelectorAll('.gradient-color-start, .gradient-color-end')
-            .forEach(function (stop) {
-                stop.setAttribute('offset', percent + '%');
-            });
+        return `M ${circleArcStartX} ${circleArcStartY} A ${radiusCircle} ${radiusCircle} 0 ${largeArcFlagCircle} 1 ${circleArcEndX} ${circleArcEndY}`;
     }
 
-    determinePercentage(50);
+    const circlePath = createCircleArcPath(89, 35, 30, -130, 130);
+    console.log(circlePath);
 
-    // background arc
-    const circleCenterX = 89; // Center x of the circle background
-    const circleCenterY = 35; // Center y of the circle background
-    const radiusCircle = 30; // Radius of the circle background
+    function createProgressArcPath(cx, cy, radius, startAngleDegrees, endAngleDegrees) {
+        const startRadians = (Math.PI / 180) * (startAngleDegrees - 90);
+        const endRadians = (Math.PI / 180) * (endAngleDegrees - 90);
 
-    const startAngleDegreesCircle = -130;
-    const endAngleDegreesCircle = 130;
-    const startRadiansCircle = (Math.PI / 180) * (startAngleDegreesCircle - 90);
-    const endRadiansCircle = (Math.PI / 180) * (endAngleDegreesCircle - 90);
+        const startX = cx + radius * Math.cos(startRadians);
+        const startY = cy + radius * Math.sin(startRadians);
+        const endX = cx + radius * Math.cos(endRadians);
+        const endY = cy + radius * Math.sin(endRadians);
 
-    // Calculate start and end points for the circle background
-    const circleArcStartX = circleCenterX + radiusCircle * Math.cos(startRadiansCircle);
-    const circleArcStartY = circleCenterY + radiusCircle * Math.sin(startRadiansCircle);
-    const circleArcEndX = circleCenterX + radiusCircle * Math.cos(endRadiansCircle);
-    const circleArcEndY = circleCenterY + radiusCircle * Math.sin(endRadiansCircle);
+        const largeArcFlag = endAngleDegrees - startAngleDegrees > 180 ? '1' : '0';
 
-    // Determine if the arc should be greater than 180 degrees
-    const largeArcFlagCircle = '1'; // Since we're effectively making a full circle
+        return `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`;
+    }
 
-    // Path for the circle background arc
-    const circleArcPath = `M ${circleArcStartX} ${circleArcStartY} A ${radiusCircle} ${radiusCircle} 0 ${largeArcFlagCircle} 1 ${circleArcEndX} ${circleArcEndY}`;
-
-    // progress arc
-    const cx = 89; // Center x of the progress arc
-    const cy = 35; // Center y of the progress arc
-    const radius = 30; // Radius of the progress arc
-
-    // Convert start and end angles from degrees to radians
-    const startAngleDegrees = -130;
-    const endAngleDegrees = 52;
-
-    const startRadians = (Math.PI / 180) * (startAngleDegrees - 90);
-    const endRadians = (Math.PI / 180) * (endAngleDegrees - 90);
-
-    // Calculate start and end points for the progress arc
-    const startX = cx + radius * Math.cos(startRadians);
-    const startY = cy + radius * Math.sin(startRadians);
-    const endX = cx + radius * Math.cos(endRadians);
-    const endY = cy + radius * Math.sin(endRadians);
-
-    // Determine if the arc for progress should be greater than 180 degrees
-    const largeArcFlag = '1'; // Using the full circle concept, but adjust based on your actual progress needs
-
-    // Path for the progress arc
-    const progressPath = `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`;
+    const progressPath = createProgressArcPath(89, 35, 30, -130, 32);
+    console.log(progressPath);
 
     return (
         <Box sx={{ display: 'flex', mt: 2, flexDirection: 'column', marginLeft: '80px' }}>
@@ -535,7 +390,7 @@ function App() {
                                         </defs>
 
                                         <path
-                                            d={circleArcPath}
+                                            d={circlePath}
                                             className='radial-slider__content-wrapper__track-background'
                                             stroke='#EEEEEE'
                                             strokeWidth='6'
