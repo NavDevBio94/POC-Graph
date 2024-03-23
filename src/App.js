@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
@@ -16,6 +16,8 @@ function App() {
     const [progress] = useState(75);
     const tooltipPosition = `calc(${progress}% - 10px)`;
     const [open, setOpenClose] = useState(true);
+    const [rotate, setRotate] = useState(0);
+    const [endAngleDegrees] = useState(40);
 
     const toggleOpenClose = () => {
         setOpenClose(!open);
@@ -96,8 +98,10 @@ function App() {
         return `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`;
     }
 
-    const progressPath = createProgressArcPath(89, 35, 30, -130, 32);
-    console.log(progressPath);
+    useEffect(() => {
+        setRotate(endAngleDegrees - 30);
+    }, [endAngleDegrees]);
+    const progressPath = createProgressArcPath(89, 35, 30, -130, endAngleDegrees);
 
     return (
         <Box sx={{ display: 'flex', mt: 2, flexDirection: 'column', marginLeft: '80px' }}>
@@ -427,11 +431,9 @@ function App() {
                                         <path
                                             d='M100.012 16.6778C100.171 16.4429 100.487 16.3748 100.728 16.5234C100.97 16.672 101.052 16.9845 100.915 17.2327L90.8109 35.4414C90.4085 36.1666 89.4823 36.4096 88.7756 35.9754C88.0689 35.5412 87.8673 34.6051 88.3325 33.9184L100.012 16.6778Z'
                                             fill='#39056C'
+                                            transform={`rotate(${rotate}, 89, 35)`}
                                         />
-                                        <path
-                                            d='M100.012 16.6778C100.171 16.4429 100.487 16.3748 100.728 16.5234C100.97 16.672 101.052 16.9845 100.915 17.2327L90.8109 35.4414C90.4085 36.1666 89.4823 36.4096 88.7756 35.9754C88.0689 35.5412 87.8673 34.6051 88.3325 33.9184L100.012 16.6778Z'
-                                            fill='#39056C'
-                                        />
+
                                         <circle cx='90' cy='34.5' r='0.5' fill='white' />
                                         <circle cx='90' cy='34.5' r='0.5' fill='white' />
                                         <path
