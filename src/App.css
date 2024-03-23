@@ -47,3 +47,36 @@
     margin-right: 10px;
     border-radius: 2px;
 }
+
+body {
+    background-color: rgb(241, 246, 247);
+}
+
+.radial-slider {
+    width: fit-content;
+    height: fit-content;
+    padding-inline: 5px;
+
+    #gradient {
+        .gradient-color-start {
+            stop-color: '#2F2F2F';
+        }
+
+        .gradient-color-end {
+            stop-color: '#990021';
+        }
+    }
+
+    .radial-slider__content-wrapper {
+        position: relative;
+        display: grid;
+    }
+
+    .radial-slider__content-wrapper__track-background {
+        fill: white;
+    }
+
+    .radial-slider__content-wrapper__progress {
+        fill: url(#gradient);
+    }
+}
