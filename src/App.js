@@ -99,7 +99,7 @@ function App() {
     }
 
     useEffect(() => {
-        setRotate(endAngleDegrees - 30);
+        setRotate(endAngleDegrees - 35);
     }, [endAngleDegrees]);
     const progressPath = createProgressArcPath(89, 35, 30, -130, endAngleDegrees);
 
