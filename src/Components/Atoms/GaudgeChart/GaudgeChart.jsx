@@ -30,12 +30,14 @@ const GaugeChart = ({ circlePath, progressPath, tickPaths, rotate }) => {
                 d={circlePath}
                 stroke='#EEEEEE'
                 strokeWidth='6'
+                stroke-linecap="round"
             />
             <path
                 d={progressPath}
                 className='radial-slider__content-wrapper__progress'
                 stroke='url(#progressGradient)'
                 strokeWidth='6'
+                stroke-linecap="round"
             />
             {tickPaths.map((tick, index) => (
                 <path
