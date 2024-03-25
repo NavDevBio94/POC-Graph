@@ -18,6 +18,7 @@ function App() {
     const tooltipPosition = `calc(${progress}% - 10px)`;
     const [open, setOpenClose] = useState(true);
     const [rotate, setRotate] = useState(0);
+    const [endAngleDegrees, setEndAngleDegrees] = useState(0);
 
     const toggleOpenClose = () => {
         setOpenClose(!open);
@@ -46,8 +47,6 @@ function App() {
     const circlePath = createCircleArcPath(89, 35, 30, -130, 130);
     console.log(circlePath);
 
-    let endAngleDegrees = 32;
-
     function createProgressArcPath(cx, cy, radius, startAngleDegrees, endAngleDegrees) {
         const startRadians = (Math.PI / 180) * (startAngleDegrees - 90);
         const endRadians = (Math.PI / 180) * (endAngleDegrees - 90);
@@ -62,9 +61,16 @@ function App() {
         return `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`;
     }
 
+    // rdr rate
+    let rdr = 61;
     useEffect(() => {
-        setRotate(endAngleDegrees - 30);
-    }, [endAngleDegrees]);
+        const anglePerPercent = 260 / 100;
+        const constrainedRDR = Math.min(rdr, 100);
+        const calculatedEndAngle = -130 + constrainedRDR * anglePerPercent;
+        setEndAngleDegrees(calculatedEndAngle);
+        setRotate(calculatedEndAngle - 30);
+    }, [rdr]);
+
     const progressPath = createProgressArcPath(89, 35, 30, -130, endAngleDegrees);
 
     return (
@@ -186,7 +192,7 @@ function App() {
                             <Box>
                                 <Typography sx={{ fontSize: '12px' }}>RDR RATE</Typography>
                                 <Typography sx={{ fontSize: '15px' }}>
-                                    <b>61%</b>
+                                    <b>{rdr}%</b>
                                 </Typography>
                             </Box>
                             <Box className='radial-slider'>
